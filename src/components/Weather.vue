@@ -1,11 +1,5 @@
 <template>
-	<div
-		id="weather"
-		:class="{
-			hot: weather && weather.cod == 200 && weather.main.temp > 25,
-			cold: weather && weather.cod == 200 && weather.main.temp <= 10,
-		}"
-	>
+	<div id="weather" :class="weatherTemperature">
 		<input
 			type="text"
 			v-model="nameInput"
@@ -28,7 +22,7 @@
 			</p>
 			<div class="temperature">
 				<span class="value">
-					{{ weather.main.temp }}
+					{{ temperatureC }}
 				</span>
 				<span> <sup>o</sup>C </span>
 			</div>
@@ -86,7 +80,18 @@ export default {
 			this.weather = await res.json()
 
 			this.nameInput = ''
-			this.$refs.nameInput.blur()
+		},
+	},
+	computed: {
+		temperatureC() {
+			return Math.round(this.weather.main.temp)
+		},
+		weatherTemperature() {
+			if (this.weather && this.weather.cod == 200) {
+				if (this.weather.main.temp > 25) return 'hot'
+				else if (this.weather.main.temp <= 10) return 'cold'
+			}
+			return ''
 		},
 	},
 }
