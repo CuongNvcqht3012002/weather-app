@@ -6,7 +6,13 @@
 			cold: weather && weather.cod == 200 && weather.main.temp <= 10,
 		}"
 	>
-		<input type="text" v-model="nameInput" @keyup.enter="submit" />
+		<input
+			type="text"
+			v-model="nameInput"
+			@keyup.enter="submit"
+			placeholder="Search..."
+			ref="nameInput"
+		/>
 		<div class="content" v-if="weather && weather.cod == 200">
 			<h1 class="name">
 				<span class="city">
@@ -63,7 +69,9 @@
 
 <script>
 export default {
-	mounted() {},
+	mounted() {
+		this.$refs.nameInput.focus()
+	},
 	data() {
 		return {
 			nameInput: '',
@@ -76,6 +84,9 @@ export default {
 
 			const res = await fetch(url)
 			this.weather = await res.json()
+
+			this.nameInput = ''
+			this.$refs.nameInput.blur()
 		},
 	},
 }

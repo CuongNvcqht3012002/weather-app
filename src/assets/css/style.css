@@ -25,6 +25,7 @@ body {
   padding: 30px 20px;
   box-shadow: 0 0 2px black;
   border-radius: 5px;
+  transition: 0.8s;
 }
 
 #weather.hot {
@@ -37,14 +38,21 @@ body {
 
 #weather input {
   padding: 10px 20px;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.4);
   font-size: 19px;
   box-shadow: 0 5px 4px rgba(0, 0, 0, 0.2);
   border: none;
   outline: none;
   display: inline-block;
-  border-radius: 7px;
+  border-radius: 0px 15px 0 15px;
   margin-bottom: 40px;
+  width: 100%;
+  transition: 0.8s;
+}
+
+#weather input:focus {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 15px 0 15px 0;
 }
 
 #weather .content {
